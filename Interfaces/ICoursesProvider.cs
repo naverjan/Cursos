@@ -1,0 +1,22 @@
+﻿using ListaCursos.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ListaCursos.Interfaces
+{
+    public interface ICoursesProvider
+    {
+        Task<ICollection<Course>> GetAllAsync();
+
+        //Creamos otra colección para buscar por el parametro (search)
+        Task<ICollection<Course>> SearchAsync(string search);
+
+        Task<Course> GetAllAsync(int id);
+
+        Task<bool> UpdateAsync(int id, Course course);
+
+        Task<(bool IsSuccess, int? Id)> AddAsync(Course course);
+    }
+}

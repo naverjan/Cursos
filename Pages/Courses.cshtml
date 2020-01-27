@@ -1,0 +1,49 @@
+﻿@page
+@model ListaCursos.coursesModel
+@{
+    ViewData["Title"] = "courses";
+}
+
+<h1>courses</h1>
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control"
+                 asp-for="Search" />
+            <button class="btn btn-light">Buscar</button>
+        </div>
+    </div>
+</form>
+@if(1 == 1) { 
+<table>
+    @foreach (var course in Model.Courses) {
+    <tr>
+        <td>@course.Id</td>
+        <td>@course.Name</td>
+        <td>@course.Author</td>
+        <td>
+            <a class="btn btn-link" asp-page="Details"
+               asp-route-id="@course.Id">
+                Ver detalles
+            </a>
+        </td>
+        <td>
+            <a class="btn btn-link" asp-page="Edit"
+               asp-route-id="@course.Id">
+                Modificar Curso
+            </a>
+        </td>
+        <td>
+            <button class="btn btn-link" asp-page-handler="Delete" onclick="return confirm('Esta seguro de eliminar')"
+               asp-route-id="@course.Id">
+                Eliminar C
+            </button>
+        </td>
+    </tr>
+    }
+</table>
+}
+
+<a asp-page="Edit" class="btn btn-primary">Crear Nuevo Curso</a>
+
