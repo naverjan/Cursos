@@ -68,9 +68,18 @@ namespace ListaCursos.Providers
             return null;
         }
     
-        public Task<ICollection<Course>> SearchAsync(string search)
+        public async Task<ICollection<Course>> SearchAsync(string search)
         {
-            throw new NotImplementedException();
+            var client = httpClientFactory.CreateClient("coursesServive");
+            var response = await client.GetAsync($"/api/courses/search/{search}");
+            if (response.IsSuccessStatusCode) {
+                var content = await response.Content.ReadAsStringAsync();
+                MemoryStream contentEnd = new MemoryStream(Encoding.UTF8.GetBytes(content));
+                var result = await JsonSerializer.DeserializeAsync<ICollection<Course>>(contentEnd, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+                return  result;
+            }
+            return null;
         }
 
         public async Task<bool> UpdateAsync(int id, Course course)
