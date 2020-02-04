@@ -29,7 +29,7 @@ namespace ListaCursos
             //de FakeCoursesProvider
             services.AddSingleton<ICoursesProvider, WebApiCoursesProvider>();
 
-            services.AddHttpClient("coursesServive", client => {
+            services.AddHttpClient("coursesService", client => {
                 client.BaseAddress = new Uri(Configuration["coursesService"]);                
             });
 

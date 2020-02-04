@@ -23,7 +23,7 @@ namespace ListaCursos.Providers
         public async Task<(bool IsSuccess, int? Id)> AddAsync(Course course)
         {
             course.Id = 0;
-            var client = httpClientFactory.CreateClient("coursesServive");
+            var client = httpClientFactory.CreateClient("coursesService");
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true                
@@ -40,7 +40,7 @@ namespace ListaCursos.Providers
 
         public async Task<ICollection<Course>> GetAllAsync()
         {
-            var client = httpClientFactory.CreateClient("coursesServive");
+            var client = httpClientFactory.CreateClient("coursesService");
             var response = await client.GetAsync("/api/courses");
             if (response.IsSuccessStatusCode)
             {
@@ -55,7 +55,7 @@ namespace ListaCursos.Providers
 
         public async Task<Course> GetAllAsync(int id)
         {
-            var client = httpClientFactory.CreateClient("coursesServive");
+            var client = httpClientFactory.CreateClient("coursesService");
             var response = await client.GetAsync($"/api/courses/{id}");
             if (response.IsSuccessStatusCode)
             {
@@ -70,7 +70,7 @@ namespace ListaCursos.Providers
     
         public async Task<ICollection<Course>> SearchAsync(string search)
         {
-            var client = httpClientFactory.CreateClient("coursesServive");
+            var client = httpClientFactory.CreateClient("coursesService");
             var response = await client.GetAsync($"/api/courses/search/{search}");
             if (response.IsSuccessStatusCode) {
                 var content = await response.Content.ReadAsStringAsync();
@@ -84,7 +84,7 @@ namespace ListaCursos.Providers
 
         public async Task<bool> UpdateAsync(int id, Course course)
         {
-            var client = httpClientFactory.CreateClient("coursesServive");
+            var client = httpClientFactory.CreateClient("coursesService");
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true
