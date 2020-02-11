@@ -1,21 +1,21 @@
-﻿var app = angular.module('myapp', ['ngRoute']);
-app.controller('myCtrl', ['$scope']);
-
-//app.config(["$routeProvider", function ($routeProvider) {
-//    $routeProvider
-//        .when('/ui-login', {
-//            templateUrl: 'ui-login.html',
-//            controller: 'loginController'
-//        })
-//        .otherwise({
-//            redirectTo: '/ui-login'
-//        });
-//}]);
-app.controller('loginController', function ($scope) {
+﻿/**
+ * 
+ */
+var app = angular.module('myapp', ['ngRoute']);
+app.controller('myCtrl', ['$scope','$http']);
+app.controller('loginController', function ($scope, $http) {
     //Controller Here
     $scope.name = "Andres verjan";
-    $scope.submit = function () {
-        console.log("hi i m coming");
+    $scope.getCourses = function () {
+
+        $http({
+            method: "GET",
+            url: "https://localhost:44377/api/courses"
+        }).success(function (response) {
+            console.log("Todo bien");
+            console.log(response);
+        }).error(function () {
+            console.log("Ocurrio un error");
+        });
     }
-    console.log("in controller");
 });

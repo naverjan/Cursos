@@ -21,11 +21,7 @@ namespace ListaCursos
 
         public EditModel(ICoursesProvider coursesProvider)
         {
-            this.coursesProvider = coursesProvider;
-            client.BaseAddress = new Uri("https://localhost:44377/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));                
+            this.coursesProvider = coursesProvider;            
         }
         public async Task<IActionResult> OnGet(int? id)
         {
